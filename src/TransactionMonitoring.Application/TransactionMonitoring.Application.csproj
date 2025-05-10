@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Interface\" />
+    <None Remove="DTO\" />
+    <None Remove="Interface\Repositories\" />
+    <None Remove="Interface\Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interface\" />
+    <Folder Include="DTO\" />
+    <Folder Include="Interface\Repositories\" />
+    <Folder Include="Interface\Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TransactionMonitoring.Domain\TransactionMonitoring.Domain.csproj" />
+  </ItemGroup>
+</Project>
