@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using TransactionMonitoring.Application.DTO;
 using TransactionMonitoring.Application.Interface.Repositories;
+using TransactionMonitoring.Application.Mappers;
 using TransactionMonitoring.Domain.Entities;
 
 namespace TransactionMonitoring.Infrastructure.Repositories.Mongo
@@ -15,35 +16,45 @@ namespace TransactionMonitoring.Infrastructure.Repositories.Mongo
             _collection = database.GetCollection<Rule>("Rules");
         }
 
-        public Task<List<RuleDto>> GetByEntityIdAsync(Guid entityId)
+        public async Task<List<RuleDto>> GetByEntityIdAsync(Guid entityId)
         {
-            throw new NotImplementedException();
+            var rules = await _collection.Find(r => r.EntityId == entityId).ToListAsync();
+            return rules.Select(x => x.Map()).ToList();
         }
 
-        public Task<RuleDto> GetByIdAsync(Guid Id)
+        public async Task<RuleDto> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var rule = await _collection.Find(r => r.Id == id).FirstOrDefaultAsync();
+            return rule == null ? null : rule.Map();
         }
 
-        public Task<List<RuleDto>> GetByProductIdAsync(Guid productId)
+        public async Task<List<RuleDto>> GetByProductIdAsync(Guid productId)
         {
-            throw new NotImplementedException();
+            var rules = await _collection.Find(r => r.ProductId == productId).ToListAsync();
+            return rules.Select(x => x.Map()).ToList();
         }
 
-        public Task<List<RuleDto>> GetByTransactionIdAsync(Guid transactionId)
+        public async Task SaveAsync(RuleDto ruleDto)
         {
-            throw new NotImplementedException();
+            var rule = ruleDto.Map();
+            rule.Id = Guid.NewGuid();
+            await _collection.InsertOneAsync(rule);
         }
 
-        public Task SaveAsync(RuleDto ruleDto)
+        public async Task UpdateAsync(RuleDto ruleDto)
         {
-            throw new NotImplementedException();
+            var filter = Builders<Rule>.Filter.Eq(r => r.Id, ruleDto.EntityId);
+            var update = Builders<Rule>.Update
+                .Set(r => r.Name, ruleDto.Name)
+                .Set(r => r.Description, ruleDto.Description)
+                .Set(r => r.Expression, ruleDto.Expression)
+                .Set(r => r.IsActive, ruleDto.IsActive)
+                .Set(r => r.ProductId, ruleDto.ProductId)
+                .Set(r => r.EntityId, ruleDto.EntityId);
+
+            await _collection.UpdateOneAsync(filter, update);
         }
 
-        public Task UpdateAsync(RuleDto ruleDto)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

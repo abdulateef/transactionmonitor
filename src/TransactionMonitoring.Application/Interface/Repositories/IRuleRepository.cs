@@ -10,7 +10,6 @@ namespace TransactionMonitoring.Application.Interface.Repositories
         Task<List<RuleDto>> GetByEntityIdAsync(Guid entityId);
         Task<RuleDto> GetByIdAsync(Guid Id);
         Task<List<RuleDto>> GetByProductIdAsync(Guid productId);
-        Task<List<RuleDto>> GetByTransactionIdAsync(Guid transactionId);
         Task UpdateAsync(RuleDto ruleDto);
     }
 }

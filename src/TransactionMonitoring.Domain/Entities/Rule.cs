@@ -12,6 +12,7 @@ namespace TransactionMonitoring.Domain.Entities
         public string Description { get; set; }
 
         public string Expression { get; set; }
+
         public bool IsActive { get; set; }
     }
 }

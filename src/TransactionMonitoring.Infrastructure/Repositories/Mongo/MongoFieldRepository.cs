@@ -2,7 +2,9 @@
 using MongoDB.Driver;
 using TransactionMonitoring.Application.DTO;
 using TransactionMonitoring.Application.Interface.Repositories;
+using TransactionMonitoring.Application.Mappers;
 using TransactionMonitoring.Domain.Entities;
+using TransactionMonitoring.Domain.Helper;
 
 namespace TransactionMonitoring.Infrastructure.Repositories.Mongo
 {
@@ -15,19 +17,26 @@ namespace TransactionMonitoring.Infrastructure.Repositories.Mongo
             _collection = database.GetCollection<FieldDefinition>("FieldDefinitions");
         }
 
-        public Task<FieldDefinitionDto> CreatFieldsAsync(FieldDefinitionDto fieldDefinitionDto)
+        public async Task<FieldDefinitionDto> CreatFieldsAsync(FieldDefinitionDto fieldDefinitionDto)
         {
-            throw new NotImplementedException();
+            var fieldDefinition = fieldDefinitionDto.Map();
+            fieldDefinition.Id = Guid.NewGuid();
+            fieldDefinition.CreateTime = DateTime.UtcNow;
+            fieldDefinition.CreateBy = "";
+            await _collection.InsertOneAsync(fieldDefinition);
+            return fieldDefinitionDto;
         }
 
-        public Task<HashSet<string>> GetBooleanFieldsAsync()
+        public async Task<HashSet<string>> GetBooleanFieldsAsync()
         {
-            throw new NotImplementedException();
+            var rules = await _collection.Find(r => r.FieldType == FieldTypes.Boolean).ToListAsync();
+            return rules.Select(x => x.FieldName).ToHashSet();
         }
 
-        public Task<HashSet<string>> GetNumericFieldsAsync()
+        public async Task<HashSet<string>> GetNumericFieldsAsync()
         {
-            throw new NotImplementedException();
+            var rules = await _collection.Find(r => r.FieldType == FieldTypes.Numeric).ToListAsync();
+            return rules.Select(x => x.FieldName).ToHashSet();
         }
     }
 }
