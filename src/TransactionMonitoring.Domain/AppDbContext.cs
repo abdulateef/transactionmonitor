@@ -16,6 +16,7 @@ namespace TransactionMonitoring.Domain
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Alert> Alerts { get; set; }
         public DbSet<FieldDefinition> FieldDefinitions { get; set; }
+        public DbSet<Rule> Rules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

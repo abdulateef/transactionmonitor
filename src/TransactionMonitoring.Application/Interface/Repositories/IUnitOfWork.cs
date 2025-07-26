@@ -8,6 +8,7 @@ namespace TransactionMonitoring.Application.Interface
         ITransactionRepository Transactions { get; }
         IAlertRepository Alerts { get; }
         IFieldRepository  Fields { get; }
+        IRuleRepository Rules { get; }
         Task SaveChangesAsync();
     }
 }

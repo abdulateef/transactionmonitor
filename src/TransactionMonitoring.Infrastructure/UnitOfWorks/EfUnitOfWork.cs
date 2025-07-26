@@ -13,12 +13,15 @@ namespace TransactionMonitoring.Infrastructure.Repositories
         public IFieldRepository Fields { get; }
         public IAlertRepository Alerts { get; }
 
+        public IRuleRepository Rules { get; }
+
         public EfUnitOfWork(AppDbContext context)
         {
             _context = context;
             Transactions = new EfTransactionRepository(context);
             Fields = new EfFieldRepository(context);
             Alerts = new EfAlertRepository(context);
+            Rules = new EfRuleRepository(context);
         }
 
         public async Task SaveChangesAsync()

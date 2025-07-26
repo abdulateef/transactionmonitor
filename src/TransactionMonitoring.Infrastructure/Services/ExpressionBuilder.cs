@@ -7,15 +7,6 @@ namespace TransactionMonitoring.Infrastructure.Services
 {
 	public class ExpressionBuilder : IExpressionBuilder
     {
-        private static readonly HashSet<string> NumericFields = new()
-    {
-        "Amount", "Velocity", "Volume", "TransactionCount"
-    };
-
-        private static readonly HashSet<string> BooleanFields = new()
-    {
-        "IsPEP", "IsSanctioned"
-    };
         private readonly IUnitOfWork _unitOfWork;
         public ExpressionBuilder(IUnitOfWork unitOfWork)
 		{
@@ -42,9 +33,11 @@ namespace TransactionMonitoring.Infrastructure.Services
             return $"{cond.Field} {op} {formattedValue}";
         }
 
-        private string FormatValue(string field, string value)
+        private async Task<string> FormatValue(string field, string value)
         {
-            if (_unitOfWork.Transactions.Contains(field))
+            var NumericFields = await _unitOfWork.Fields.GetNumericFieldsAsync();
+            var BooleanFields = await _unitOfWork.Fields.GetBooleanFieldsAsync();
+            if (NumericFields.Contains(field))
                 return value;
 
             if (BooleanFields.Contains(field))

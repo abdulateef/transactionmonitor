@@ -6,6 +6,7 @@ namespace TransactionMonitoring.Application.Models
 {
 	public class CreateRuleRequestModel
 	{
+        public string Description { get; set; }
         public string Name { get; set; }
         public Guid? EntityId { get; set; } 
         public Guid? ProductId { get; set; }

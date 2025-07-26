@@ -1,11 +1,12 @@
 ﻿using System;
+using TransactionMonitoring.Application.DTO;
+using TransactionMonitoring.Application.Models;
+
 namespace TransactionMonitoring.Application.Interface.Services
 {
 	public interface IRuleEngineService
 	{
-		public IRuleEngineService()
-		{
-		}
-	}
+        Task<RuleDto> CreateAsync(CreateRuleRequestModel request);
+    }
 }
 
