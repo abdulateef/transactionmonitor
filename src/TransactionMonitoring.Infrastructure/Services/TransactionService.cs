@@ -18,7 +18,6 @@ namespace TransactionMonitoring.Infrastructure.Services
         public async Task<Transaction> AddTransactionAsync(Transaction transaction)
         {
             await _uow.Transactions.AddAsync(transaction);
-            await _uow.SaveChangesAsync();
             return transaction;
         }
     }

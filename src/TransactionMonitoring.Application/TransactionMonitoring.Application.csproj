@@ -11,12 +11,16 @@
     <None Remove="DTO\" />
     <None Remove="Interface\Repositories\" />
     <None Remove="Interface\Services\" />
+    <None Remove="Mappers\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interface\" />
     <Folder Include="DTO\" />
     <Folder Include="Interface\Repositories\" />
     <Folder Include="Interface\Services\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TransactionMonitoring.Domain\TransactionMonitoring.Domain.csproj" />
