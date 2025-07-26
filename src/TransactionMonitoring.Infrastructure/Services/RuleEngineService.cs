@@ -7,8 +7,8 @@ using TransactionMonitoring.Domain.Entities;
 
 namespace TransactionMonitoring.Infrastructure.Services
 {
-	public class RuleEngineService
-	{
+	public class RuleEngineService : IRuleEngineService
+    {
 		
         private readonly IExpressionBuilder _expressionBuilder;
         private readonly IUnitOfWork _iunitofwork;
@@ -23,18 +23,17 @@ namespace TransactionMonitoring.Infrastructure.Services
         {
             var expression = _expressionBuilder.BuildExpression(request.Conditions, request.LogicalOperator);
 
-            var rule = new Rule
+            var rule = new RuleDto
             {
-                Id = Guid.NewGuid(),
                 Name = request.Name,
                 EntityId = request.EntityId,
                 ProductId = request.ProductId,
                 Expression = expression,
                 IsActive = true,
-                CreatedAt = DateTime.UtcNow
+                Description = request.Description
+                
             };
-
-            await _repository.SaveAsync(rule);
+            await _iunitofwork.Rules.SaveAsync(rule);
             return rule;
         }
     }

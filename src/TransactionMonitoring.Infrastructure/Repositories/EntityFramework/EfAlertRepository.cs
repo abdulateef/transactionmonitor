@@ -15,22 +15,22 @@ namespace TransactionMonitoring.Infrastructure.Repositories
             _context = appDbContext;
         }
 
-        public Task<List<Alert>> GetByEntityIdAsync(Guid entityId)
+        public Task<List<AlertDto>> GetByEntityIdAsync(Guid entityId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Alert> GetByIdAsync(Guid Id)
+        public Task<AlertDto> GetByIdAsync(Guid Id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Alert>> GetByProductIdAsync(Guid productId)
+        public Task<List<AlertDto>> GetByProductIdAsync(Guid productId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Alert>> GetByTransactionIdAsync(Guid transactionId)
+        public Task<List<AlertDto>> GetByTransactionIdAsync(Guid transactionId)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +49,7 @@ namespace TransactionMonitoring.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(Alert alert)
+        public Task UpdateAsync(AlertDto alert)
         {
             throw new NotImplementedException();
         }

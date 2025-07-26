@@ -12,6 +12,9 @@ namespace TransactionMonitoring.Application.DTO
         public string Description { get; set; }
 
         public string Expression { get; set; }
+
+        public bool IsActive { get; set; }
+
     }
 }
 
