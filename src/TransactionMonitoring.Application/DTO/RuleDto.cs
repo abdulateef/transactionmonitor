@@ -1,0 +1,17 @@
+﻿using System;
+namespace TransactionMonitoring.Application.DTO
+{
+	public class RuleDto
+	{
+        public string Name { get; set; }
+
+        public Guid? EntityId { get; set; }
+
+        public Guid? ProductId { get; set; }
+
+        public string Description { get; set; }
+
+        public string Expression { get; set; }
+    }
+}
+

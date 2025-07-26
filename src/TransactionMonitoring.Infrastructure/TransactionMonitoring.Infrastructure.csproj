@@ -10,11 +10,17 @@
     <None Remove="Repositories\" />
     <None Remove="UnitOfWorks\" />
     <None Remove="Services\" />
+    <None Remove="Messaging\" />
+    <None Remove="Repositories\Mongo\" />
+    <None Remove="Repositories\EntityFramework\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="UnitOfWorks\" />
     <Folder Include="Services\" />
+    <Folder Include="Messaging\" />
+    <Folder Include="Repositories\Mongo\" />
+    <Folder Include="Repositories\EntityFramework\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TransactionMonitoring.Application\TransactionMonitoring.Application.csproj" />

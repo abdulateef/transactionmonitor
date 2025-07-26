@@ -1,7 +1,9 @@
 ﻿using System;
 using MongoDB.Driver;
 using TransactionMonitoring.Application.Interface;
+using TransactionMonitoring.Application.Interface.Repositories;
 using TransactionMonitoring.Infrastructure.Repositories;
+using TransactionMonitoring.Infrastructure.Repositories.Mongo;
 
 namespace TransactionMonitoring.Infrastructure.UnitOfWorks
 {
@@ -9,11 +11,16 @@ namespace TransactionMonitoring.Infrastructure.UnitOfWorks
     {
         public ITransactionRepository Transactions { get; }
 
+        public IAlertRepository Alerts { get; }
+
+        public IFieldRepository Fields { get; }
+
         public MongoUnitOfWork(IMongoDatabase database)
         {
             Transactions = new MongoTransactionRepository(database);
+            Alerts = new MongoAlertRepository(database);
+            Fields = new MongoFieldRepository(database);
         }
-
         // Mongo doesn't support SaveChanges in same way
         public Task SaveChangesAsync() => Task.CompletedTask;
     }
