@@ -24,7 +24,7 @@ namespace TransactionMonitoring.Infrastructure.Repositories.EntityFramework
             throw new NotImplementedException();
         }
 
-        public Task<List<RuleDto>> GetByProductIdAsync(Guid productId)
+        public Task<List<RuleDto>> GetByProductIdAsync(Guid productId, Guid customerId)
         {
             throw new NotImplementedException();
         }

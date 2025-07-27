@@ -26,7 +26,7 @@ namespace TransactionMonitoring.Infrastructure.Services
             var rule = new RuleDto
             {
                 Name = request.Name,
-                EntityId = request.EntityId,
+                CustomerId = request.EntityId,
                 ProductId = request.ProductId,
                 Expression = expression,
                 IsActive = true,

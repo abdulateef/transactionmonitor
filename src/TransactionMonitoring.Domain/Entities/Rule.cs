@@ -5,7 +5,7 @@ namespace TransactionMonitoring.Domain.Entities
     {
         public string Name { get; set; }
 
-        public Guid? EntityId { get; set; }
+        public Guid? CustomerId { get; set; }
 
         public Guid? ProductId { get; set; }
 

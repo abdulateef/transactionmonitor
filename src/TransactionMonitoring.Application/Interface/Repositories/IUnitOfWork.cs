@@ -9,6 +9,8 @@ namespace TransactionMonitoring.Application.Interface
         IAlertRepository Alerts { get; }
         IFieldRepository  Fields { get; }
         IRuleRepository Rules { get; }
+        ICustomerRepository Customers { get; }
+        ICustomerUserRepository CustomerUsers { get; }
         Task SaveChangesAsync();
     }
 }

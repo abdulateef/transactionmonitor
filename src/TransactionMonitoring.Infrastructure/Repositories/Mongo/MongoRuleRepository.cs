@@ -18,7 +18,7 @@ namespace TransactionMonitoring.Infrastructure.Repositories.Mongo
 
         public async Task<List<RuleDto>> GetByEntityIdAsync(Guid entityId)
         {
-            var rules = await _collection.Find(r => r.EntityId == entityId).ToListAsync();
+            var rules = await _collection.Find(r => r.CustomerId == entityId).ToListAsync();
             return rules.Select(x => x.Map()).ToList();
         }
 
@@ -28,9 +28,9 @@ namespace TransactionMonitoring.Infrastructure.Repositories.Mongo
             return rule == null ? null : rule.Map();
         }
 
-        public async Task<List<RuleDto>> GetByProductIdAsync(Guid productId)
+        public async Task<List<RuleDto>> GetByProductIdAsync(Guid productId, Guid customerId)
         {
-            var rules = await _collection.Find(r => r.ProductId == productId).ToListAsync();
+            var rules = await _collection.Find(r => r.ProductId == productId && r.CustomerId == customerId).ToListAsync();
             return rules.Select(x => x.Map()).ToList();
         }
 
@@ -43,14 +43,14 @@ namespace TransactionMonitoring.Infrastructure.Repositories.Mongo
 
         public async Task UpdateAsync(RuleDto ruleDto)
         {
-            var filter = Builders<Rule>.Filter.Eq(r => r.Id, ruleDto.EntityId);
+            var filter = Builders<Rule>.Filter.Eq(r => r.Id, ruleDto.CustomerId);
             var update = Builders<Rule>.Update
                 .Set(r => r.Name, ruleDto.Name)
                 .Set(r => r.Description, ruleDto.Description)
                 .Set(r => r.Expression, ruleDto.Expression)
                 .Set(r => r.IsActive, ruleDto.IsActive)
                 .Set(r => r.ProductId, ruleDto.ProductId)
-                .Set(r => r.EntityId, ruleDto.EntityId);
+                .Set(r => r.CustomerId, ruleDto.CustomerId);
 
             await _collection.UpdateOneAsync(filter, update);
         }
