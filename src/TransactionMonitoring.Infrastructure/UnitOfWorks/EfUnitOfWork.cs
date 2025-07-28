@@ -12,8 +12,9 @@ namespace TransactionMonitoring.Infrastructure.Repositories
         public ITransactionRepository Transactions { get; }
         public IFieldRepository Fields { get; }
         public IAlertRepository Alerts { get; }
-
         public IRuleRepository Rules { get; }
+        public ICustomerRepository Customers { get; }
+        public ICustomerUserRepository CustomerUsers { get; }
 
         public EfUnitOfWork(AppDbContext context)
         {
@@ -22,6 +23,7 @@ namespace TransactionMonitoring.Infrastructure.Repositories
             Fields = new EfFieldRepository(context);
             Alerts = new EfAlertRepository(context);
             Rules = new EfRuleRepository(context);
+            Customers = new EfCustomerRepository(context);
         }
 
         public async Task SaveChangesAsync()

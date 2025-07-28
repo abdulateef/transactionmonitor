@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Data;
 using TransactionMonitoring.Application.DTO;
 using TransactionMonitoring.Application.Interface;
 using TransactionMonitoring.Application.Interface.Services;
+using TransactionMonitoring.Domain.Entities;
+using static MongoDB.Driver.WriteConcern;
+using TransactionMonitoring.Domain.Enums;
+using System.Text;
 
 namespace TransactionMonitoring.Infrastructure.Services
 {
@@ -13,9 +18,30 @@ namespace TransactionMonitoring.Infrastructure.Services
             _iunitofwork = unitOfWork;
 		}
 
-        public Task<CreateAlertDto> CreateAlert(CreateAlertDto createAlertDto)
+        public Task<CreateAlertDto> RaiseAlert(RuleDto ruleDto, TransactionDTO transaction)
         {
-            throw new NotImplementedException();
+
+            Alert(Guid customerId, Guid productId, Guid transactionId, string ruleName,
+            string reason, string severity, string expression,
+           decimal amount, AlertStatus alertStatus, Guid ruleId)
+
+            var alert = new Alert(
+                transaction.CustomerId,
+                transaction.ProductId,
+                 ruleDto.Name,
+                 $"Rule violated: {ruleDto.Name}",
+                 "",
+                 ruleDto.Expression,
+                 transaction.Amount,
+                 AlertStatus.New,
+                 ruleDto.ii
+                )
+          
+
+            await _alertRepository.SaveAsync(alert);
+
+            // Optionally: notify an external system
+            await _notificationService.NotifyAlertAsync(alert);
         }
 
         public Task<List<AlertDto>> GetAlertsByEntityId(Guid entityId)

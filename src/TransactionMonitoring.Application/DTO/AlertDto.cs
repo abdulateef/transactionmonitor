@@ -10,7 +10,7 @@ namespace TransactionMonitoring.Application.DTO
         public string Severity { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsResolved { get; set; }
-        public Guid EntityId { get;  set; }
+        public Guid CustomerId { get;  set; }
         public Guid ProductId { get;  set; }
     }
 }

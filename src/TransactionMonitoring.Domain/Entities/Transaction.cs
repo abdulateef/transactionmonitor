@@ -13,7 +13,7 @@ namespace TransactionMonitoring.Domain.Entities
         public string ClientKey { get; set; }
         public string SenderCountry { get; set; }
         public string BeneCountry { get; set; }
-        public Guid EntityId { get; set; }
+        public Guid CustomerId { get; set; }
         public Guid ProductId { get; set; }
 
     }

@@ -9,7 +9,7 @@ namespace TransactionMonitoring.Application.Mappers
         public static RuleDto Map(this Rule rule) => new RuleDto
         {
             Name = rule.Name,
-            EntityId = rule.EntityId,
+            CustomerId = rule.CustomerId,
             ProductId = rule.ProductId,
             Description = rule.Description,
             Expression = rule.Expression,
@@ -19,7 +19,7 @@ namespace TransactionMonitoring.Application.Mappers
         public static Rule Map(this RuleDto dto) => new Rule
         {
             Name = dto.Name,
-            EntityId = dto.EntityId,
+            CustomerId = dto.CustomerId,
             ProductId = dto.ProductId,
             Description = dto.Description,
             Expression = dto.Expression,
